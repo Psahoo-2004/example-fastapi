@@ -1,0 +1,12 @@
+name: Build and Deploy Code
+
+on: [push,pull_request]
+
+jobs:
+  job1:
+    runs-on: ubntu-latest
+    steps:
+      - name: pulling get repo
+        uses: action/checkour@v2
+        name: say hi to Pratyush
+        run: echo "hello Pratyush"

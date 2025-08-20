@@ -1,37 +1,38 @@
+# from app.calculations import add,subtract,multiply,divide
 
-# def add(num1: int, num2: 2):
-#     return num1 + num2
-
-
-# def subtract(num1: int, num2: int):
-#     return num1 - num2
+def add(num1: int, num2: 2):
+    return num1 + num2
 
 
-# def multiply(num1: int, num2: int):
-#     return num1 * num2
+def subtract(num1: int, num2: int):
+    return num1 - num2
 
 
-# def divide(num1: int, num2: int):
-
-#     return num1 / num2
-
-
-# class InsufficientFunds(Exception):
-#     pass
+def multiply(num1: int, num2: int):
+    return num1 * num2
 
 
-# class BankAccount():
-#     def __init__(self, starting_balance=0):
-#         self.balance = starting_balance
+def divide(num1: int, num2: int):
 
-#     def deposit(self, amount):
-#         self.balance += amount
+    return num1 / num2
 
-#     def withdraw(self, amount):
-#         if amount > self.balance:
-#             raise InsufficientFunds("Insufficient funds in account")
 
-#         self.balance -= amount
+class InsufficientFunds(Exception):
+    pass
 
-#     def collect_interest(self):
-#         self.balance *= 1.1
+
+class BankAccount():
+    def __init__(self, starting_balance=0):
+        self.balance = starting_balance
+
+    def deposit(self, amount):
+        self.balance += amount
+
+    def withdraw(self, amount):
+        if amount > self.balance:
+            raise InsufficientFunds("Insufficient funds in account")
+        self.balance -= amount
+
+    def collect_interest(self):
+        self.balance *= 1.1
+
