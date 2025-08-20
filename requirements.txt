@@ -27,7 +27,7 @@ uvicorn==0.35.0
 watchfiles==1.1.0
 websockets==15.0.1
 SQLAlchemy==2.0.42
-alembic==1.13.2        # migrations
+# alembic==1.13.2        # migrations
 psycopg2-binary==2.9.9 # PostgreSQL driver (if using Postgres)
 databases[postgresql]==0.9.0  # async database support
 python-dotenv==1.0.1
