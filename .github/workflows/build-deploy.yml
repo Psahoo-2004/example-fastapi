@@ -8,5 +8,5 @@ jobs:
     steps:
       - name: pulling get repo
         uses: action/checkour@v2
-      - name: say hi to Pratyush
-        run: echo "hello Pratyush"
+      - name: say hi to Babu
+        run: echo "hello Babu"
