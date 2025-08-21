@@ -9,7 +9,7 @@ jobs:
       DATABASE_HOSTNAME: ${{secrets.DATABASE_HOSTNAME}}
       DATABASE_PORT: ${{secrets.DATABASE_PORT}}
       DATABASE_PASSWORD: ${{secrets.DATABASE_PASSWORD}}
-      DATABASE_NAME: ${{secrets.DATABASE_NAME}}_test
+      DATABASE_NAME: ${{secrets.DATABASE_NAME}}  # 👈 append _test here once
       DATABASE_USERNAME: ${{secrets.DATABASE_USERNAME}}
       SECRET_KEY: ${{secrets.SECRET_KEY}}
       ALGORITHM: ${{secrets.ALGORITHM}}
@@ -21,7 +21,7 @@ jobs:
         env:
           POSTGRES_USER: ${{secrets.DATABASE_USERNAME}}
           POSTGRES_PASSWORD: ${{secrets.DATABASE_PASSWORD}}
-          POSTGRES_DB: postgres # Use a default database to connect to
+          POSTGRES_DB: ${{secrets.DATABASE_NAME}}  # 👈 must match env above
         ports:
           - 5432:5432
         options: >-
@@ -45,21 +45,6 @@ jobs:
 
       - name: Install dependencies
         run: pip install -r requirements.txt
-
-      - name: Wait for PostgreSQL to be ready
-        run: |
-          echo "Waiting for PostgreSQL to be ready..."
-          while ! pg_isready -h localhost -p 5432 -U ${{secrets.DATABASE_USERNAME}}; do
-            sleep 1
-          done
-        env:
-          PGPASSWORD: ${{secrets.DATABASE_PASSWORD}}
-
-      - name: Create test database
-        run: |
-          psql -h localhost -U ${{secrets.DATABASE_USERNAME}} -d postgres -c "CREATE DATABASE ${{secrets.DATABASE_NAME}}_test;"
-        env:
-          PGPASSWORD: ${{secrets.DATABASE_PASSWORD}}
 
       - name: Run tests with pytest
         run: |
