@@ -6,7 +6,7 @@ jobs:
   job1:
     environment: testing
     env:
-      DATABASE_HOSTNAME: postgres
+      DATABASE_HOSTNAME: ${{secrets.DATABASE_HOSTNAME}}
       DATABASE_PORT: ${{secrets.DATABASE_PORT}}
       DATABASE_PASSWORD: ${{secrets.DATABASE_PASSWORD}}
       DATABASE_NAME: ${{secrets.DATABASE_NAME}}  # 👈 append _test here once
