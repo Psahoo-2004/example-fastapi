@@ -4,23 +4,24 @@ on: [push, pull_request]
 
 jobs:
   job1:
-    environment:
-      testing
+    environment: testing
     env:
       DATABASE_HOSTNAME: ${{secrets.DATABASE_HOSTNAME}}
       DATABASE_PORT: ${{secrets.DATABASE_PORT}}
       DATABASE_PASSWORD: ${{secrets.DATABASE_PASSWORD}}
-      DATABASE_NAME: ${{secrets.DATABASE_NAME}}_test
+      DATABASE_NAME: ${{secrets.DATABASE_NAME}}_test   # 👈 append _test here once
       DATABASE_USERNAME: ${{secrets.DATABASE_USERNAME}}
-      SECRET_KEY: ${{secrets.SECRET_KEY}} 
-      ALGORITHM: ${{secrets.ALGORITHM }}
+      SECRET_KEY: ${{secrets.SECRET_KEY}}
+      ALGORITHM: ${{secrets.ALGORITHM}}
       ACCESS_TOKEN_EXPIRE_MINUTES: ${{secrets.ACCESS_TOKEN_EXPIRE_MINUTES}}
+
     services:
       postgres:
         image: postgres
         env:
+          POSTGRES_USER: ${{secrets.DATABASE_USERNAME}}
           POSTGRES_PASSWORD: ${{secrets.DATABASE_PASSWORD}}
-          POSTGRES_DB: ${{secrets.DATABASE_NAME}}_test
+          POSTGRES_DB: ${{secrets.DATABASE_NAME}}_test   # 👈 must match env above
         ports:
           - 5432:5432
         options: >-
@@ -28,18 +29,23 @@ jobs:
           --health-interval 10s
           --health-timeout 5s
           --health-retries 5
+
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repo
         uses: actions/checkout@v3
+
       - name: Install Python 3.11
         uses: actions/setup-python@v4
         with:
           python-version: "3.11"
+
       - name: Upgrade pip
         run: python -m pip install --upgrade pip
+
       - name: Install dependencies
         run: pip install -r requirements.txt
+
       - name: Run tests with pytest
         run: |
           pip install pytest
