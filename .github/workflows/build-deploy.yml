@@ -19,7 +19,7 @@ jobs:
       postgres:
         image: postgres
         env:
-          POSTGRES_USER: localhost
+          POSTGRES_USER: postgres
           POSTGRES_PASSWORD: Pratyush
           POSTGRES_DB: fastapi
         ports:
